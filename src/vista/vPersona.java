@@ -14,6 +14,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dao.daoPersona;
+import dao.daoUsuario;
+import modelo.Persona;
+import modelo.Usuario;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.JButton;
+
 public class vPersona extends JFrame {
 
 	private JPanel contentPane;
@@ -22,6 +32,15 @@ public class vPersona extends JFrame {
 	private JTextField txtEdad;
 	private JLabel lblId;
 	private JTextField txtNombre;
+	daoPersona dao = new daoPersona();
+	DefaultTableModel modelo = new DefaultTableModel();
+	ArrayList<Persona> lista = new ArrayList<Persona>();
+	Persona persona;
+	int fila = -1;
+	private JButton btnAgregar;
+	private JButton btnEditar;
+	private JButton btnEliminar;
+	private JButton btnBorrar;
 
 	/**
 	 * Launch the application.
@@ -46,7 +65,7 @@ public class vPersona extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(vPersona.class.getResource("/img/jyujyu.png")));
 		setTitle("CRUD PERSONAL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 627, 488);
+		setBounds(100, 100, 627, 539);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -106,6 +125,12 @@ public class vPersona extends JFrame {
 		contentPane.add(scrollPane);
 		
 		JTable tblPersonas = new JTable();
+		tblPersonas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		tblPersonas.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null},
@@ -117,5 +142,25 @@ public class vPersona extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(tblPersonas);
+		
+		
+		
+		btnAgregar = new JButton("AGREGAR");
+		btnAgregar.setBounds(23, 440, 89, 23);
+		contentPane.add(btnAgregar);
+		
+		btnEditar = new JButton("EDITAR");
+		btnEditar.setBounds(152, 440, 89, 23);
+		contentPane.add(btnEditar);
+		
+		btnEliminar = new JButton("ELIMINAR");
+		btnEliminar.setBounds(274, 440, 89, 23);
+		contentPane.add(btnEliminar);
+		
+		btnBorrar = new JButton("BORRAR");
+		btnBorrar.setBounds(418, 440, 89, 23);
+		contentPane.add(btnBorrar);
+		
+		
 	}
 }
