@@ -59,10 +59,10 @@ public class daoPersona {
 	}
 
 	
-	public boolean EliminarUsuario(int Id) {
+	public boolean EliminarPersona(int Id) {
 		PreparedStatement ps = null;
 		try {
-			ps = cx.conectar().prepareStatement("DELETE FROM usuario WHERE id=?");
+			ps = cx.conectar().prepareStatement("DELETE FROM persona WHERE id=?");
 			ps.setInt(1, Id);
 			ps.executeUpdate();
 			return true;
@@ -73,15 +73,15 @@ public class daoPersona {
 
 	}
 
-	public boolean editarUsuario(Persona user) {
+	public boolean editarPersona(Persona user) {
 		PreparedStatement ps = null;
 		try {
-			ps = cx.conectar().prepareStatement("UPDATE persona SET nombre=?,apellidopaterno=?,apellidopaterno=?,edad=? WHERE id=?");
-			ps.setInt(1, user.getId());
-			ps.setString(2,user.getNombre());
-			ps.setString(3,user.getApellidopaterno() );
-			ps.setString(4,user.getApellidomaterno());
-			ps.setInt(5, user.getEdad());
+			ps = cx.conectar().prepareStatement("UPDATE persona SET nombre=?,apellidopaterno=?,apellidomaterno=?,edad=? WHERE id=?");			
+			ps.setString(1,user.getNombre());
+			ps.setString(2,user.getApellidopaterno() );
+			ps.setString(3,user.getApellidomaterno());
+			ps.setInt(4, user.getEdad());
+			ps.setInt(5, user.getId());
 			ps.executeUpdate();
 			return true;
 		} catch (SQLException e) {
